@@ -1,0 +1,43 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.container {
+  border: 1px solid darkgray;
+  padding: 0.75rem;
+  width: 50%;
+  margin: 1rem;
+}
+
+.dummy {
+  height: 220px;
+  width: 50%;
+  border: 1px solid turquoise;
+  font-size: 0.8rem;
+  margin: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-bottom::after,
+.arrow-top::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+.arrow-top::after {
+  border-width: 0 5.5px 6px 5.5px;
+  border-color: transparent transparent black transparent;
+  bottom: 100%;
+}
+
+.arrow-bottom::after {
+  border-width: 0 5.5px 6px 5.5px;
+  border-color: transparent transparent black transparent;
+  bottom: 100%;
+}
