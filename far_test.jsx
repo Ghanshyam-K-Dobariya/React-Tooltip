@@ -154,27 +154,34 @@ export default class ExercisesList extends Component {
         console.log(error);
       });
   }
-
-  UNSAFE_componentWillUpdate() {
-    //SELECT * FROM PRESENTATION.GOLDEN_ACCOUNT_ATTR_BRIDGE WHERE GOLDEN_ACCOUNT_ID=118338003926162
-    console.log(
-      "COMPANYAccountId----COMPANYAccountId---->",
-      this.state.COMPANY_ACCOUNT_ID
-    );
-    axios
-      .get(
-        `http://localhost:5000/accountData/?accountID=${this.state.COMPANY_ACCOUNT_ID}`
-      )
-      .then(response => {
-        console.log("response is COMPANYAccountId", response);
-        console.log("response.data.rows---", response.data.attributesData);
-        this.setState({
-          // COMPANY_ACCOUNT_ID:response.data.attributesData[0].COMPANY_ACCOUNT_ID,
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (
+      this.state.COMPANY_ACCOUNT_ID &&
+      prevState.COMPANY_ACCOUNT_ID !== this.state.COMPANY_ACCOUNT_ID
+    ) {
+      console.log(
+        "------ previous COMPANY_ACCOUNT_ID was ",
+        prevState.COMPANY_ACCOUNT_ID,
+        "  updated COMPANY_ACCOUNT_ID  = ",
+        this.state.COMPANY_ACCOUNT_ID,
+        "   now calling api for  ",
+        this.state.COMPANY_ACCOUNT_ID
+      );
+      axios
+        .get(
+          `http://localhost:5000/accountData/?accountID=${this.state.COMPANY_ACCOUNT_ID}`
+        )
+        .then(response => {
+          console.log("response is COMPANYAccountId", response);
+          console.log("response.data.rows---", response.data.attributesData);
+          this.setState({
+            // COMPANY_ACCOUNT_ID:response.data.attributesData[0].COMPANY_ACCOUNT_ID,
+          });
+        })
+        .catch(function(error) {
+          console.log(error);
         });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    }
   }
 
   render() {
